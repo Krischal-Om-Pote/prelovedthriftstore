@@ -1,0 +1,30 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-1821e8dfaf2-5da94a143da3037a": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "db.sqlite3",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "C:\\Users\\dell\\Downloads\\nice\\ecommerce-master\\ecommerce_krischal\\db.sqlite3",
+				"url": "jdbc:sqlite:C:\\Users\\dell\\Downloads\\nice\\ecommerce-master\\ecommerce_krischal\\db.sqlite3",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
