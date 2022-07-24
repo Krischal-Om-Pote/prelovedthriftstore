@@ -20,6 +20,11 @@
                         <input type="text" name="name" class="form-control" />
                         @error('name') <small class="text-danger">{{$message}}</small> @enderror
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Price</label>
+                        <input type="text" name="price" class="form-control" />
+                        @error('price') <small class="text-danger">{{$message}}</small> @enderror
+                    </div>
                     <div class="col-md-12 mb-3">
                         <label>Description</label>
                         <textarea type="text" name="description" class="form-control" row="3"></textarea>

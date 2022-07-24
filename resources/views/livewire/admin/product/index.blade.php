@@ -18,6 +18,7 @@
                         <th>SN</th>
                         <th>Image</th>
                         <th>Name</th>
+                        <th>Price(Rs)</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -28,6 +29,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td><img src="{{ asset('/uploads/product/'.$product->image)}}" alt="no" height="50" width="50"></td>
                         <td>{{$product->name}}</td>
+                        <td>{{$product->price}}</td>
                         <td>{{$product->status=='1'?'Hidden':'Visible'}}</td>
                         <td>
                             <a href="{{url('admin/product/'.$product->id.'/edit')}}" class="btn btn-success">Edit</a>

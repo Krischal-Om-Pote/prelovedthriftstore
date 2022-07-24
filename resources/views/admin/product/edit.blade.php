@@ -21,6 +21,11 @@
                         <input type="text" name="name" value="{{ $product->name }}" class="form-control" />
                         @error('name') <small class="text-danger">{{$message}}</small> @enderror
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Price</label>
+                        <input type="text" name="name" value="{{ $product->price }}" class="form-control" />
+                        @error('name') <small class="text-danger">{{$message}}</small> @enderror
+                    </div>
                     <div class="col-md-12 mb-3">
                         <label>Description</label>
                         <textarea type="text" name="description" class="form-control" row="3">{{ $product->description }}</textarea>

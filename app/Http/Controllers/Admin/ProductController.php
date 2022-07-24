@@ -27,7 +27,7 @@ class ProductController extends Controller
 
         $product = new Product;
         $product->name = $validatedData['name'];
-        $product->description = $validatedData['description'];
+        $product->price = $validatedData['price'];
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
@@ -35,6 +35,7 @@ class ProductController extends Controller
             $file->move('uploads/product/', $filename);
             $product->image = $filename;
         }
+        $product->description = $validatedData['description'];
         $product->meta_title = $validatedData['meta_title'];
         $product->meta_keyword = $validatedData['meta_keyword'];
         $product->meta_description = $validatedData['meta_description'];
@@ -73,6 +74,7 @@ class ProductController extends Controller
             $updateCat = Product::where('id', $product_id)->update(
                 [
                     'name' => $request->name,
+                    'price' => $request->price,
                     'description' => $request->description,
                     'meta_title' => $request->meta_title,
                     'meta_keyword' => $request->meta_keyword,
