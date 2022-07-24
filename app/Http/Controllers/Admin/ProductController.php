@@ -77,7 +77,7 @@ class ProductController extends Controller
                     'meta_title' => $request->meta_title,
                     'meta_keyword' => $request->meta_keyword,
                     'meta_description' => $request->meta_description,
-                    'status' => $status,
+                    // 'status' => $status,
                     'category_id' => $request->category_id,
                     'image' => $filename,
                 ]
@@ -92,7 +92,7 @@ class ProductController extends Controller
                 'meta_title' => $request->meta_title,
                 'meta_keyword' => $request->meta_keyword,
                 'meta_description' => $request->meta_description,
-                'status' => $request->status,
+                // 'status' => $request->status,
             ]
         );
         return redirect('admin/product')->with('message', 'Product Updated Successfully');
