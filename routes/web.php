@@ -54,7 +54,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/user/create', 'create');
         Route::post('/user', 'store');
         Route::get('/user/{user}/edit', 'edit');
-        Route::put('user/{user_id}', 'update');
-        Route::post('user/delete', 'destroy');
+        Route::put('/user/{user_id}', 'update');
+        Route::post('/user/delete', 'destroy');
     });
 });

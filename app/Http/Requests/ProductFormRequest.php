@@ -32,6 +32,10 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'quantity' => [
+                'required',
+                'integer'
+            ],
             'description' => [
                 'required'
             ],

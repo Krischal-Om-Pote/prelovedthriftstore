@@ -28,6 +28,7 @@ class ProductController extends Controller
         $product = new Product;
         $product->name = $validatedData['name'];
         $product->price = $validatedData['price'];
+        $product->quantity = $validatedData['quantity'];
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
@@ -70,34 +71,51 @@ class ProductController extends Controller
 
             $file->move('uploads/product/', $filename);
             // $Product->image = $filename;
-            $status = $request->status = true ? '1' : '0';
-            $updateCat = Product::where('id', $product_id)->update(
-                [
-                    'name' => $request->name,
-                    'price' => $request->price,
-                    'description' => $request->description,
-                    'meta_title' => $request->meta_title,
-                    'meta_keyword' => $request->meta_keyword,
-                    'meta_description' => $request->meta_description,
-                    // 'status' => $status,
-                    'category_id' => $request->category_id,
-                    'image' => $filename,
-                ]
-            );
-            return redirect('admin/product')->with('message', 'Product Updated Successfully');
+
+            $product->image = $filename;
+        } else {
+            $product->image = $product->image;
         }
 
-        $updateCat = Product::where('id', $product_id)->update(
+        $status = $request->status = true ? '1' : '0';
+        /*$updateCat = Product::where('id', $product_id)->update(
             [
                 'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $request->quantity,
                 'description' => $request->description,
                 'meta_title' => $request->meta_title,
                 'meta_keyword' => $request->meta_keyword,
                 'meta_description' => $request->meta_description,
-                // 'status' => $request->status,
+                // 'status' => $status,
+                'category_id' => $request->category_id,
+                'image' => $filename,
             ]
-        );
+        );*/
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->description = $request->description;
+        $product->meta_title = $request->meta_title;
+        $product->meta_keyword = $request->meta_keyword;
+        $product->status = $request->status;
+
+        $product->save();
+
         return redirect('admin/product')->with('message', 'Product Updated Successfully');
+
+        // $updateCat = Product::where('id', $product_id)->update(
+        //     [
+        //         'name' => $request->name,
+        //         'description' => $request->description,
+        //         'meta_title' => $request->meta_title,
+        //         'meta_keyword' => $request->meta_keyword,
+        //         'meta_description' => $request->meta_description,
+        //         // 'status' => $request->status,
+        //     ]
+        // );
+        // return redirect('admin/product')->with('message', 'Product Updated Successfully');
     }
 
     public function destroy(Request $request)

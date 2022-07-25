@@ -19,6 +19,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Image</th>
+                        <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -28,7 +29,8 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->image}}</td>
+                        <td><img src="{{ asset('/uploads/user/'.$user->image)}}" alt="no" height="50" width="50"></td>
+                        <td>{{$user->role_as}}</td>
                         <td>
                             <a href="{{url('admin/user/'.$user->id.'/edit')}}" class="btn btn-success">Edit</a>
                             <button class="btn btn-danger deleteData" data-bs-toggle="modal" data-bs-target="#dModal" data-id="{{$user->id}}">Delete</button>

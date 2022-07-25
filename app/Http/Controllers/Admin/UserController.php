@@ -21,22 +21,29 @@ class UserController extends Controller
         $categories = Category::latest()->get();
         return view('admin.user.create', compact('categories'));
     }
-    public function store(UserFormRequest  $request)
+    public function store(Request  $request)
     {
-        $validatedData = $request->validated();
+        // dd($request);
+        // $validatedData = $request->validate([]);
 
-        $user = new User;
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
+        // $user = new User;
+        // $user->name = $validatedData['name'];
+        // $user->email = $validatedData['email'];
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
             $file->move('uploads/user/', $filename);
-            $user->image = $filename;
         }
-        $user->password = $validatedData['password'];
-        $user->role_as = $validatedData['role_as'];
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'role_as' => $request->input('role_as'),
+            'image' => $filename,
+        ]);
+        // $user->password = $validatedData['password'];
+        // $user->role_as = $validatedData['role_as'];
         $user->save();
         return redirect('admin/user')->with('message', 'User Added Successfully');
     }
@@ -49,8 +56,10 @@ class UserController extends Controller
     public function update(UserFormRequest  $request, $user_id)
     {
         // dd($request->all());
-        $validatedData = $request->validated();
+        //$validatedData = $request->validated();
         $user = User::findOrFail($user_id);
+
+        echo "hello";
         // echo "<pre>";
         // print_r($Product);
         // die();
@@ -65,9 +74,15 @@ class UserController extends Controller
             $filename = time() . '.' . $ext;
 
             $file->move('uploads/user/', $filename);
-            // $Product->image = $filename;
-            $status = $request->status = true ? '1' : '0';
-            $updateCat = User::where('id', $user_id)->update(
+            $user->image = $filename;
+
+            echo $filename;
+        } else {
+            $user->image = $user->image;
+        }
+        // $Product->image = $filename;
+        $status = $request->status = true ? '1' : '0';
+        /*$updateCat = User::where('id', $user_id)->update(
                 [
                     'name' => $request->name,
                     'email' => $request->email,
@@ -78,21 +93,27 @@ class UserController extends Controller
                     // 'category_id' => $request->category_id,
                     'image' => $filename,
                 ]
-            );
-            return redirect('admin/user')->with('message', 'Product Updated Successfully');
-        }
+            );*/
+        // return redirect('admin/user')->with('message', 'Product Updated Successfully');
 
-        $updateCat = User::where('id', $user_id)->update(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'role_as' => $request->role_as,
-                // 'meta_description' => $request->meta_description,
-                // 'status' => $request->status,
-            ]
-        );
-        return redirect('admin/user')->with('message', 'Product Updated Successfully');
+
+        // $updateCat = User::where('id', $user_id)->update(
+        //     [
+        //         'name' => $request->name,
+        //         'email' => $request->email,
+        //         'password' => $request->password,
+        //         'role_as' => $request->role_as,
+        //         // 'meta_description' => $request->meta_description,
+        //         // 'status' => $request->status,
+        //     ]
+        // );
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_as = $request->role_as;
+
+        $user->save();
+
+        //return redirect('admin/user')->with('message', 'User Updated Successfully');
     }
 
     public function destroy(Request $request)

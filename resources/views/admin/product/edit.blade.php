@@ -23,8 +23,13 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Price</label>
-                        <input type="text" name="name" value="{{ $product->price }}" class="form-control" />
-                        @error('name') <small class="text-danger">{{$message}}</small> @enderror
+                        <input type="text" name="price" value="{{ $product->price }}" class="form-control" />
+                        @error('price') <small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+                    <div class="col-md-2">
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" value="{{ $product->quantity }}" class="form-control" />
+                        @error('quantity') <small class="text-danger">{{$message}}</small> @enderror
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Description</label>

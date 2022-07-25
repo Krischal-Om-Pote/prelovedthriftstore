@@ -25,6 +25,16 @@
                         <input type="text" name="email" class="form-control" />
                         @error('email') <small class="text-danger">{{$message}}</small> @enderror
                     </div>
+                    <div class="col-md-12 mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" />
+                        @error('password') <small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label>Role As</label>
+                        <input type="text" name="role_as" class="form-control" />
+                        @error('role_as') <small class="text-danger">{{$message}}</small> @enderror
+                    </div>
                     <div class="col-md-6 mb-3">
                         <label>Image</label>
                         <input type="file" name="image" class="form-control" />

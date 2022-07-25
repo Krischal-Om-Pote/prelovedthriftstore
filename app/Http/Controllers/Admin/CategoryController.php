@@ -40,13 +40,27 @@ class CategoryController extends Controller
         // dd($request->all());
         $validatedData = $request->validated();
 
-        $updateCat = Category::where('id', $category_id)->update(
+        if ($request->get("status") == null) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+
+        /*$updateCat = Category::where('id', $category_id)->update(
             [
                 'name' => $request->name,
                 'status' => $request->status,
             ]
-        );
+        );*/
+        $category = Category::find($category_id);
+        $category->name = $request->get("name");
+        $category->status = $status;
+
+        $category->save();
+
         return redirect('admin/category')->with('message', 'Category Updated Successfully');
+
+        
     }
 
     public function destroy(Request $request)

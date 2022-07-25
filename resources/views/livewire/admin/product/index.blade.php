@@ -6,8 +6,8 @@
         <div class="cart">
             <div class="card-header">
                 <h3>
-                    Category
-                    <a href="{{ url('admin/product/create') }}" class="btn btn-primary btn-sm float-end">Add Category</a>
+                    Product
+                    <a href="{{ url('admin/product/create') }}" class="btn btn-primary btn-sm float-end">Add Product</a>
                 </h3>
             </div>
         </div>
@@ -19,6 +19,7 @@
                         <th>Image</th>
                         <th>Name</th>
                         <th>Price(Rs)</th>
+                        <th>Quantity</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -30,6 +31,7 @@
                         <td><img src="{{ asset('/uploads/product/'.$product->image)}}" alt="no" height="50" width="50"></td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->price}}</td>
+                        <td>{{$product->quantity}}</td>
                         <td>{{$product->status=='1'?'Hidden':'Visible'}}</td>
                         <td>
                             <a href="{{url('admin/product/'.$product->id.'/edit')}}" class="btn btn-success">Edit</a>
