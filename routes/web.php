@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Auth::routes();
 Route::post('/add-to-cart', [CartController::class, 'addProduct']);
 Route::middleware(['auth'])->group(function () {
     Route::get('cart',[CartController::class,'viewcart']);
+    Route::get('checkout',[CheckoutController::class,'index']);
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
