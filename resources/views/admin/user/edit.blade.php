@@ -12,12 +12,12 @@
             </div>
         </div>
         <div class="cartbody">
-            <form action="{{ url('admin/user/'.$user->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('admin/user/update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label>Name</label>
+                        <input type="hidden" name="id" value="{{ $user->id }}" class="form-control" />
                         <input type="text" name="name" value="{{ $user->name }}" class="form-control" />
                         @error('name') <small class="text-danger">{{$message}}</small> @enderror
                     </div>

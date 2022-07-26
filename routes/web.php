@@ -22,14 +22,14 @@ use App\Http\Controllers\Frontend\CheckoutController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts/inc/frontend/home');
 });
 
 Auth::routes();
 Route::post('/add-to-cart', [CartController::class, 'addProduct']);
 Route::middleware(['auth'])->group(function () {
-    Route::get('cart',[CartController::class,'viewcart']);
-    Route::get('checkout',[CheckoutController::class,'index']);
+    Route::get('cart', [CartController::class, 'viewcart']);
+    Route::get('checkout', [CheckoutController::class, 'index']);
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -61,7 +61,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/user/create', 'create');
         Route::post('/user', 'store');
         Route::get('/user/{user}/edit', 'edit');
-        Route::put('/user/{user_id}', 'update');
+        Route::post('/user/update', 'update');
         Route::post('/user/delete', 'destroy');
     });
 });

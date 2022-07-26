@@ -53,13 +53,13 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user'), compact('categories'));
     }
 
-    public function update(UserFormRequest  $request, $user_id)
+    public function update(Request  $request)
     {
-        // dd($request->all());
+        // echo "hello";
+        // dd($request);
         //$validatedData = $request->validated();
-        $user = User::findOrFail($user_id);
+        $user = User::findOrFail($request->id);
 
-        echo "hello";
         // echo "<pre>";
         // print_r($Product);
         // die();
@@ -109,11 +109,11 @@ class UserController extends Controller
         // );
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role_as = $request->role_as;
+        // $user->role_as = $request->role_as;
 
         $user->save();
 
-        //return redirect('admin/user')->with('message', 'User Updated Successfully');
+        return redirect('admin/user')->with('message', 'User Updated Successfully');
     }
 
     public function destroy(Request $request)

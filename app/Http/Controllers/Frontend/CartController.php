@@ -14,6 +14,8 @@ class CartController extends Controller
     {
         $product_id = $request->input('product_id');
         $product_qty = $request->input('product_qty');
+        echo $product_id, $product_qty;
+        die();
         if (Auth::check()) {
             $prod_check = Product::where('id', $product_id)->first();
             if ($prod_check) {
@@ -34,7 +36,7 @@ class CartController extends Controller
     }
     public function viewcart()
     {
-        $cartitems=Cart::where('user_id',Auth::id())->get();
-        return view('frontend.cart',compact('cartitems'));
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+        return view('frontend.cart', compact('cartitems'));
     }
 }

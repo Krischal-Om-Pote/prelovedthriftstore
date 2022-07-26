@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$category->name}}</td>
-                        <td>{{$category->status=='1'?'Hidden':'Visible'}}</td>
+                        <td>{{$category->status=='1'?'Visible':'Hidden'}}</td>
                         <td>
                             <a href="{{url('admin/category/'.$category->id.'/edit')}}" class="btn btn-success">Edit</a>
                             <button class="btn btn-danger deleteData" data-bs-toggle="modal" data-bs-target="#dModal" data-id="{{$category->id}}">Delete</button>
