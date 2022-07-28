@@ -1,22 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Livewire\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
-class CartController extends Controller
+class Home extends Component
 {
-    public function addProduct(Request $request)
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $newCollections = [];
+
+    public function mount()
     {
-        $product_id = $request->input('product_id');
-        $product_qty = $request->input('product_qty');
-        echo $product_id, $product_qty;
-        die();
+        $this->newCollections = Product::latest()->get();
+    }
+
+    public function render()
+    {
+        return view('livewire.frontend.home');
+    }
+
+    public function addToCart($product_id)
+    {
         if (Auth::check()) {
+            //dd('here');
             $prod_check = Product::where('id', $product_id)->first();
             if ($prod_check) {
                 if (Cart::where('product_id', $product_id)->where('user_id', Auth::id())->exists()) {
@@ -27,17 +38,12 @@ class CartController extends Controller
                     $cartItem->user_id = Auth::id();
                     $cartItem->quantity = $product_id;
                     $cartItem->save();
+                    // return redirect(url('/cart'));
                     return response()->json(['status' => $prod_check->name . "Added to cart"]);
                 }
             }
         } else {
             return response()->json(['status' => "Login to Continue"]);
         }
-    }
-    public function viewcart()
-    {
-        $cartitems = Cart::where('user_id', Auth::id())->get();
-        //return view('', compact('cartitems'));
-        return view('layouts.inc.frontend.cart', compact('cartitems'));
     }
 }
