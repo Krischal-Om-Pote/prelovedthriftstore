@@ -37,7 +37,6 @@ class CartController extends Controller
     public function viewcart()
     {
         $cartitems = Cart::where('user_id', Auth::id())->get();
-        //return view('', compact('cartitems'));
-        return view('layouts.inc.frontend.cart', compact('cartitems'));
+        return view('layouts.inc.frontend.products.cart', compact('cartitems'));
     }
 }
