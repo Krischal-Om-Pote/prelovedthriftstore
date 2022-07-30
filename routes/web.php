@@ -25,13 +25,15 @@ Route::get('/', function () {
     return view('layouts/inc/frontend/home');
 });
 
+
 Auth::routes();
+
 Route::post('/add-to-cart', [CartController::class, 'addProduct']);
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', [CartController::class, 'viewcart'])->name('cart');
     Route::get('checkout', [CheckoutController::class, 'index']);
 });
-
+Route::get('search', [ProductController::class], 'search');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/login', [LoginController::class, 'login']);
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {

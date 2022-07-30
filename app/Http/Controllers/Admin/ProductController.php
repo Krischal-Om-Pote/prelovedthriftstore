@@ -128,4 +128,9 @@ class ProductController extends Controller
             return redirect('admin/product')->with('message', 'Fail to Delete Product');
         }
     }
+    public function search(Request $req)
+    {
+        // return $req->input();
+        return $data = Product::where('name', 'like', '%' . $req->input('query') . '%')->get();
+    }
 }

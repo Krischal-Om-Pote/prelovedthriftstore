@@ -13,10 +13,13 @@ class CartController extends Controller
     public function addProduct(Request $request)
     {
         $product_id = $request->input('product_id');
+        $product_id = $request->input('image');
+        $product_id = $request->input('price');
         $product_qty = $request->input('product_qty');
         echo $product_id, $product_qty;
         die();
         if (Auth::check()) {
+            // not used
             $prod_check = Product::where('id', $product_id)->first();
             if ($prod_check) {
                 if (Cart::where('product_id', $product_id)->where('user_id', Auth::id())->exists()) {
@@ -25,6 +28,8 @@ class CartController extends Controller
                     $cartItem = new Cart();
                     $cartItem->product_id = $product_id;
                     $cartItem->user_id = Auth::id();
+                    $cartItem->image = $product_id;
+                    $cartItem->price = $product_id;
                     $cartItem->quantity = $product_id;
                     $cartItem->save();
                     return response()->json(['status' => $prod_check->name . "Added to cart"]);

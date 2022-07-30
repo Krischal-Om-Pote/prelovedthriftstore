@@ -39,7 +39,6 @@
                         <li><a href="">PRODUCTS</a></li>
                         <li><a href="">ABOUT US</a></li>
                         <li><a href="">CONTACT US</a></li>
-                        <li><a href="">ACCOUNTS</a></li>
                         @guest
                         <li><a href="{{ url('/login') }}">LOGIN</a></li>
                         <li><a href="{{ url('/register') }}">REGISTER</a></li>
@@ -48,7 +47,7 @@
                     </ul>
 
                 </nav>
-                <img src=" {{ asset('assets/image/cart.png') }}" width="60px" height="60px">
+                <a href="{{url('/cart')}}"><img src=" {{ asset('assets/image/cart.png') }}" width="60px" height="60px"></a>
                 <img src="{{ asset('assets/image/menu.png') }}" class="menu-icon" on click="menutoggle()">
             </div>
         </div>
@@ -110,34 +109,53 @@
         </div>
     </div>
     </div> -->
-    @foreach($cartitems as $item)
-    <div class="small-container cart-page">
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-            <tr>
-                <td>
-                    <div class="class cart-info">
-                        <img src="{{ asset('uploads/product/') }}" alt="Product" />
-                        <div>
 
-                            <p>{{$item->product}}</p>
-                            <small>{{$item->name}}</small>
+    @foreach($cartitems as $item)
+
+    <div class="class container">
+        <div class="row">
+            <table class="table table-hover">
+                <tr>
+                    <th width="50%">Product</th>
+                    <th width="10%">Price</th>
+                    <th width="8%">Quantity</th>
+                    <th width="22%">Subtotal</th>
+                    <th width="10%"></th>
+                </tr>
+                <!-- @php $total=0;
+                @endphp
+                @if(session('cart'))
+                @foreach(session('cart') as $id=>$product)
+                @endforeach
+                @endif -->
+                <tr>
+                    <td>
+                        <div class="class cart-info">
+                            <img src="{{ asset('uploads/product/'.$item->image) }}" alt="Product" />
+                            <div>
+
+
+                                <!-- <small>{{$item->price}}</small> -->
+
+                            </div>
 
                         </div>
-
-                    </div>
-                </td>
-                <td><input type=" number" value="1">
-                </td>
-                <td></td>
-            </tr>
-        </table>
+                    </td>
+                    <td>
+                        <p>{{$item->price}}</p>
+                    </td>
+                    <td>
+                        <p>{{$item->quantity }}</p>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
     </div>
+
     @endforeach
+    <button onclick="location.href='/';" class="btn btn -info">
+        <i class="fa fa-search" aria-hidden="true"></i> Back to shop!</button>
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -181,7 +199,7 @@
 
             </div>
             <hr>
-            <p class="copyright">Copyright 2020</p>
+            <p class="copyright">Copyright 2022</p>
         </div>
     </div>
 </body>

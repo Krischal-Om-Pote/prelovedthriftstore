@@ -26,6 +26,8 @@ class Home extends Component
 
     public function addToCart($product_id)
     {
+
+
         if (Auth::check()) {
             // dd('here');
             $prod_check = Product::where('id', $product_id)->first();
@@ -39,6 +41,8 @@ class Home extends Component
                     $cartItem = new Cart();
                     $cartItem->product_id = $product_id;
                     $cartItem->user_id = Auth::id();
+                    $cartItem->image = $product_id;
+                    $cartItem->price = $product_id;
                     $cartItem->quantity = $product_id;
                     $cartItem->save();
                     // return redirect(url('/cart'));
