@@ -1,4 +1,3 @@
-<div>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -109,7 +108,7 @@
             </div> -->
                 @foreach($newCollections as $product)
                 <div class="col-4">
-                    <img src="{{ asset('assets/image/product5.jpg') }}">
+                    <img src="{{ asset('uploads/product/'.$product->image) }}" />
                     <h3>{{ $product->name }}</h3>
                     <h4>M,L,XL</h4>
                     <p>Rs.{{ $product->price }}</p>
@@ -124,158 +123,135 @@
                 </div>
 
                 @endforeach
-            </div>
-            <h2 class="title">Best Sellers</h2>
-            <div class="row">
-                <div class="col-4">
-                    <img src="{{ asset('assets/image/product1.jpg') }}">
-                    <h3>Black Half Sleeve Tshirt</h3>
-                    <h4>M,L,XL</h4>
-                    <p>NRS 1000</p>
-                </div>
-                <div class="col-4">
-                    <img src="{{ asset('assets/image/product6.jpg') }}">
-                    <h3>White Full Sleeve Tshirt</h3>
-                    <h4>M,L,XL</h4>
-                    <p>NRS 1250</p>
-                </div>
-                <div class="col-4">
-                    <img src="{{ asset('assets/image/product12.jpg') }}">
-                    <h3>Grey Crop Tshirt</h3>
-                    <h4>M,L,XL</h4>
-                    <p>NRS 950</p>
-                </div>
-            </div>
-        </div>
-        <!----------sale---------->
-        <div class="offer">
-            <div class="small-container">
-                <div class="col-2">
-                    <img src="{{ asset('assets/image/sale.png') }}" class="offer-img">
 
-                </div>
-                <div class="col-2">
-                    <p>EXCLUSIVE SALE PRICES</p>
-                    <H1>BUY ALL 4 FOR REDUCED PRICES</H1>
-                    <small>Buy any 4 of our product including tshirt , crop tshirt or a full sleeve product for a heavily reduced price.</small>
-                    <p><a href="" class="btn">BUY NOW &#10148;</a></p>
+                <!----------sale---------->
+                <div class="offer">
+                    <div class="small-container">
+                        <div class="col-2">
+                            <img src="{{ asset('assets/image/sale.png') }}" class="offer-img">
 
-                </div>
+                        </div>
+                        <div class="col-2">
+                            <p>EXCLUSIVE SALE PRICES</p>
+                            <H1>BUY ALL 4 FOR REDUCED PRICES</H1>
+                            <small>Buy any 4 of our product including tshirt , crop tshirt or a full sleeve product for a heavily reduced price.</small>
+                            <p><a href="" class="btn">BUY NOW &#10148;</a></p>
 
-            </div>
+                        </div>
 
-
-        </div>
-        <div class="brands">
-            <div class="small-container">
-                <div class="row">
-                    <div class="col-5">
-                        <img src="{{ asset('assets/image/adgrey.png') }}">
-                    </div>
-                    <div class="col-5">
-                        <img src="{{ asset('assets/image/vlone.png') }}">
-                    </div>
-                    <div class="col-5">
-                        <img src="{{ asset('assets/image/ow.png') }}">
-                    </div>
-                    <div class="col-5">
-                        <img src="{{ asset('assets/image/awge.png') }}">
                     </div>
 
+
                 </div>
-            </div>
-        </div>
-        <!footer>
-            <div class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer-col-1">
-                            <h3>DOWNLOAD YOUR APP HERE</h3>
-                            <p>Available in both android and ios</p>
-                            <div class="app-logo">
-                                <img src="{{ asset('assets/image/app-store.png') }}">
-                                <img src="{{ asset('assets/image/play-store.png') }}">
+                <div class="brands">
+                    <div class="small-container">
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="{{ asset('assets/image/adgrey.png') }}">
+                            </div>
+                            <div class="col-5">
+                                <img src="{{ asset('assets/image/vlone.png') }}">
+                            </div>
+                            <div class="col-5">
+                                <img src="{{ asset('assets/image/ow.png') }}">
+                            </div>
+                            <div class="col-5">
+                                <img src="{{ asset('assets/image/awge.png') }}">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!footer>
+                    <div class="footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="footer-col-1">
+                                    <h3>DOWNLOAD YOUR APP HERE</h3>
+                                    <p>Available in both android and ios</p>
+                                    <div class="app-logo">
+                                        <img src="{{ asset('assets/image/app-store.png') }}">
+                                        <img src="{{ asset('assets/image/play-store.png') }}">
+
+
+                                    </div>
+                                </div>
+                                <div class="footer-col-1">
+                                    <img src="{{ asset('assets/image/logo.png') }}">
+                                    <p>Our purpose is to provide good clothes in reasonable price</p>
+                                </div>
+                                <div class="footer-col-3">
+                                    <h3>Useful Links</h3>
+                                    <ul>
+                                        <li>Coupons</li>
+                                        <li>Blog Post</li>
+                                        <li>Return Policy</li>
+                                        <li>Join affiliate</li>
+                                    </ul>
+
+                                </div>
+                                <div class="footer-col-4">
+                                    <h3>Follow Us</h3>
+                                    <ul>
+                                        <li>Facebook</li>
+                                        <li>Instagram</li>
+                                        <li>Youtube</li>
+                                        <li>Twitter</li>
+                                    </ul>
+
+                                </div>
+
 
 
                             </div>
-                        </div>
-                        <div class="footer-col-1">
-                            <img src="{{ asset('assets/image/logo.png') }}">
-                            <p>Our purpose is to provide good clothes in reasonable price</p>
-                        </div>
-                        <div class="footer-col-3">
-                            <h3>Useful Links</h3>
-                            <ul>
-                                <li>Coupons</li>
-                                <li>Blog Post</li>
-                                <li>Return Policy</li>
-                                <li>Join affiliate</li>
-                            </ul>
+                            <hr>
+                            <p class="copyright">Copyright 2020</p>
 
                         </div>
-                        <div class="footer-col-4">
-                            <h3>Follow Us</h3>
-                            <ul>
-                                <li>Facebook</li>
-                                <li>Instagram</li>
-                                <li>Youtube</li>
-                                <li>Twitter</li>
-                            </ul>
-
-                        </div>
-
-
 
                     </div>
-                    <hr>
-                    <p class="copyright">Copyright 2020</p>
-
-                </div>
-
-            </div>
-            <script>
-                var MenuItems = document.getElementById("Menu Items");
-                MenuItems.style.maxHeight = "0px";
-
-                function menutoggle() {
-                    if (MenuItems.style.maxHeight = "200px") {} else {
+                    <script>
+                        var MenuItems = document.getElementById("Menu Items");
                         MenuItems.style.maxHeight = "0px";
-                    }
-                }
-            </script>
-            <script>
-                $(document).ready(function() {
-                    $('.addToCartBtn').click(function(e) {
-                        console.log('hi');
-                        e.preventDefault();
-                        var product_id = getElementById('prod_id').val();
-                        var product_qty = getElementById('qty-input').val();
-                        console.log(product_id);
-                        console.log(product_qty);
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                        function menutoggle() {
+                            if (MenuItems.style.maxHeight = "200px") {} else {
+                                MenuItems.style.maxHeight = "0px";
                             }
-                        });
-                        $.ajax({
-                            type: "POST",
-                            url: "/add-to-cart",
-                            data: {
-                                'product_id': product_id,
-                                'product_qty': product_qty,
-                            },
-                            success: function(response) {
-                                swal(response.status);
-                            }
+                        }
+                    </script>
+                    <script>
+                        $(document).ready(function() {
+                            $('.addToCartBtn').click(function(e) {
+                                console.log('hi');
+                                e.preventDefault();
+                                var product_id = getElementById('prod_id').val();
+                                var product_qty = getElementById('qty-input').val();
+                                console.log(product_id);
+                                console.log(product_qty);
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/add-to-cart",
+                                    data: {
+                                        'product_id': product_id,
+                                        'product_qty': product_qty,
+                                    },
+                                    success: function(response) {
+                                        swal(response.status);
+                                    }
+
+                                });
+                            });
+
 
                         });
-                    });
-
-
-                });
-            </script>
-            @livewireScripts
+                    </script>
+                    @livewireScripts
     </body>
 
     </html>
-</div>

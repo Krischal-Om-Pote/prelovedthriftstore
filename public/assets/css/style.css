@@ -361,3 +361,10 @@ ul {
 .modal-footer {
     padding-top: 0rem;
 }
+
+/* cart items */
+
+.cart-page{
+    margin: 80px auto;
+    border-collapse: collapse;
+}
