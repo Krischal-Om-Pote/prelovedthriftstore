@@ -40,10 +40,6 @@
                                 </div>
 
                             </li>
-                            <li><a href="">HOME</a></li>
-                            <li><a href="">PRODUCTS</a></li>
-                            <li><a href="">ABOUT US</a></li>
-                            <li><a href="">CONTACT US</a></li>
                             @guest
                             <li><a href="{{ url('/login') }}">LOGIN</a></li>
                             <li><a href="{{ url('/register') }}">REGISTER</a></li>
