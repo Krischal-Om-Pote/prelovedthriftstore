@@ -130,7 +130,9 @@ class ProductController extends Controller
     }
     public function search(Request $req)
     {
+
         // return $req->input();
-        return $data = Product::where('name', 'like', '%' . $req->input('query') . '%')->get();
+        $data = Product::where('name', 'like', '%' . $req->input('query') . '%')->get();
+        return view('livewire.frontend.home', ['newCollections' => $data]);
     }
 }

@@ -41,9 +41,9 @@ class Home extends Component
                     $cartItem = new Cart();
                     $cartItem->product_id = $product_id;
                     $cartItem->user_id = Auth::id();
-                    $cartItem->image = $product_id;
-                    $cartItem->price = $product_id;
-                    $cartItem->quantity = $product_id;
+                    $cartItem->image = $prod_check->image;
+                    $cartItem->price = $prod_check->price;
+                    $cartItem->quantity = 1;
                     $cartItem->save();
                     // return redirect(url('/cart'));
                     //return response()->json(['status' => $prod_check->name . "Added to cart"]);

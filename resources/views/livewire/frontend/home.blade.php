@@ -7,6 +7,7 @@
         <title>PreLoved</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         <!-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}"> -->
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
                         <ul id="MenuItems ">
                             <li>
                                 <div class="search-container">
-                                    <form action="/search">
+                                    <form action="{{url('/search')}}">
                                         <input type="search" placeholder="Search.." name="query" style="height: 30px;margin-top: 9px;">
                                         <button type="submit"><i class="fa fa-search"></i></button>
                                     </form>
@@ -94,12 +95,18 @@
                     <h3>{{ $product->name }}</h3>
                     <h4>M,L,XL</h4>
                     <p>Rs.{{ $product->price }}</p>
+                    @if($product->quantity>0)
+                    <label class="bage bg-success">In stock</label>
+                    @else
+                    <label class="bage bg-danger">Out stock</label>
+                    @endif
                     <div class="card shadow product_data">
                         <div>
                         </div>
                         <div class="col-md-9">
+                            @if($product->quantity>0)
                             <button wire:click="addToCart({{ $product->id }})" type="button" class="btn btn-success me-3 Btn float-start">Add to Cart <i class="fa fa-shopping-cart"></i></button>
-
+                            @endif
                         </div>
                     </div>
                 </div>

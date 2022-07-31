@@ -12,12 +12,15 @@
     <meta name="viewport" content="width-device-width , initial-scale=1.0">
     <title>PreLoved</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('assets/js/bootstrap.bundle.mins') }}"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/js/jquery-3.6.0.min.js') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 @livewireStyles
@@ -106,52 +109,110 @@
     </div>
     </div> -->
 
-    @foreach($cartitems as $item)
+    <!-- @foreach($cartitems as $item)
 
     <div class="class container">
         <div class="row">
             <table class="table table-hover">
-                <tr>
-                    <th width="50%">Product</th>
-                    <th width="10%">Price</th>
-                    <th width="8%">Quantity</th>
-                    <th width="22%">Subtotal</th>
-                    <th width="10%"></th>
-                </tr>
-                <!-- @php $total=0;
+                <thead>
+                    <tr>
+                        <th width="50%">Product</th>
+                        <th width="10%">Price</th>
+                        <th width="8%">Quantity</th>
+                        <th width="22%">Subtotal</th>
+                        <th width="10%"></th>
+                    </tr>
+                </thead>
+
+                 @php $total=0;
                 @endphp
                 @if(session('cart'))
                 @foreach(session('cart') as $id=>$product)
                 @endforeach
                 @endif -->
-                <tr>
-                    <td>
-                        <div class="class cart-info">
-                            <img src="{{ asset('uploads/product/'.$item->image) }}" alt="Product" />
-                            <div>
+    <!-- <tbody>
+                    <tr>
+                        <td>
+                            <div class="class cart-info">
+                                <img src="{{ asset('uploads/product/'.$item->image) }}" alt="Product" class="img-fluid img-thumbnail" width="80px" />
+                                <div> -->
 
 
-                                <!-- <small>{{$item->price}}</small> -->
+    <!-- <small>{{$item->price}}</small> -->
+    <!-- 
+                                </div>
 
                             </div>
+                        </td>
+                        <td>
+                            <p>{{$item->price}}</p>
+                        </td>
+                        <td>
+                            <p>
+                            <div class="input-group-text-center mb-3" style="width:130px;">
+                                <button class="input-group-text decrement-btn" id="down">-</button>
+                                <input type="text" name="quantity" class="form-control qty-input text-center" value="{{$item->quantity }}" id="total-count">
+                                <button class="input-group-text increment-btn" id="up">+</button>
+                            </div>
+                            </p>
+                        </td>
+                        <td>
 
-                        </div>
-                    </td>
-                    <td>
-                        <p>{{$item->price}}</p>
-                    </td>
-                    <td>
-                        <p>{{$item->quantity }}</p>
-                    </td>
-                    <td></td>
-                </tr>
+                        </td>
+                    </tr>
+
+                </tbody>
+
             </table>
         </div>
-    </div>
+    </div> -->
 
     @endforeach
-    <button onclick="location.href='/';" class="btn btn -info">
-        <i class="fa fa-search" aria-hidden="true"></i> Back to shop!</button>
+    <div class="container my-5">
+        <div class="card shadow">
+            <div class="card-body">
+                @php $total=0; @endphp
+                @foreach($cartitems as $item)
+                <div class="row product_data">
+                    <div class="col-md-2 my-auto">
+                        <img src="{{asset('uploads/product/'.$item->image)}}" alt="Image here" width="80px" height="80px">
+                    </div>
+                    <div class="col-md-5 my-auto">
+                        <label>{{$item->products->name}}</label>
+                    </div>
+                    <div class="col-2 my-auto">
+                        <label>Rs {{$item->price}}</label>
+                    </div>
+                    <div class="col-md-3 my-auto">
+                        <input type="hidden" class="prod_id" value="{{$item->product_id}}">
+                        @if($item->quantity)
+                        <label for="Quantity">Quantity</label>
+                        <div class="input-group-text-center mb-3" style="width:130px;">
+                            <button class="input-group-text changeQuantity decrement-btn">-</button>
+                            <input type="text" name="quantity" class="form-control qty-input text-center" value="{{$item->quantity}}">
+                            <button class="input-group-text changeQuantity increment-btn">+</button>
+                        </div>
+                        @php $total+=$item->price*$item->quantity; @endphp
+                        @else
+                        <h6>Out of Stock</h6>
+                        @endif
+                    </div>
+                    <div class="col-md-2 my-auto">
+                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+
+                @endforeach
+            </div>
+            <div class="card-footer">
+                <h6>Total Price: Rs {{$total}}
+                    <a href="{{url('checkout')}}" class="btn btn-outline-success float-end">Proceed to Checkout</a>
+                </h6>
+            </div>
+        </div>
+    </div>
+    <a href="/" class="btn btn-info" type="button">
+        <i class="fa fa-search" aria-hidden="true"></i> Back to shop!</a>
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -199,6 +260,115 @@
         </div>
     </div>
 </body>
+<script>
+    // Select total count
+    // const totalCount = document.getElementById("total-count");
+
+    // Variable to track count
+    // var count = 0;
+
+    // Display initial count value
+    // totalCount.innerText = count;
+    $('.increment-btn').click(function(e) {
+        console.log("up");
+        e.preventDefault();
+        var inc_value = $(this).closest('.product_data').find('.qty-input').val();
+        var value = parseInt(inc_value, 10);
+        // value = isNan(value) ? 0 : value;
+        if (value < 10) {
+            value++;
+            $(this).closest('.product_data').find('.qty-input').val(value);
+        }
+
+
+    });
+
+    $('.decrement-btn').click(function(e) {
+        console.log("down");
+        e.preventDefault();
+        var dec_value = $(this).closest('.product_data').find('.qty-input').val();
+        var value = parseInt(dec_value, 10);
+        // value = isNan(value) ? 0 : value;
+        if (value > 1) {
+            value--;
+            $(this).closest('.product_data').find('.qty-input').val(value);
+        }
+
+
+    });
+    $('.delete-cart-item').click(function(e) {
+        console.log("here");
+        dd("here");
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var prod_id = $(this).closest('.product_data').find('.prod_id').val();
+        $.ajax({
+            method: "POST",
+            url: "delete-cart-item",
+            data: {
+                'prod_id': prod_id,
+            },
+            sucess: function(response) {
+                window.location.reload();
+                swal("", response.status, "success");
+            }
+
+
+        });
+
+    });
+    $('.changeQuantity').click(function(e) {
+        e.preventDefault();
+        var prod_id = $(this).closest('.product_data').find('.prod_id').val();
+        var qty = $(this).closest('.product_data').find('.qty-input').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            method: "POST",
+            url: "update-cart",
+            data: {
+                'prod_id': prod_id,
+                'prod_qty': qty,
+            },
+            sucess: function(response) {
+                alert(response);
+                // window.location.reload();
+                // swal("", response.status, "success");
+            }
+
+
+        });
+
+    });
+
+    // const handleIncrement = () => {
+    //     // count++;
+    //     // totalCount.innerText = count;
+
+    //     let count = $("#total-count").val();
+    //     count = parseInt(count) + 1;
+    //     $("#total-count").val(count);
+
+    // };
+    // const handleDecrement = () => {
+    //     let count = $("#total-count").val();
+    //     count = parseInt(count) - 1;
+    //     $("#total-count").val(count);
+    // };
+    // const incrementCount = document.getElementById("up");
+    // const decrementCount = document.getElementById("down");
+
+    // // Add click event to buttons
+    // incrementCount.addEventListener("click", handleIncrement);
+    // decrementCount.addEventListener("click", handleDecrement);
+</script>
 
 </html>
 
