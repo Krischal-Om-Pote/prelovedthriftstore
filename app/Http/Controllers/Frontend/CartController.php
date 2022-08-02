@@ -47,9 +47,9 @@ class CartController extends Controller
     public function deleteproduct(Request $request)
     {
         if (Auth::check()) {
-            $prod_id = $request->input('prod_id');
-            if (Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists()) {
-                $cartItem = Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->first();
+            $prod_id = $request['prod_id'];
+            if (Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->exists()) {
+                $cartItem = Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->first();
                 $cartItem->delete();
                 return response()->json(['status' => "Product Deleted Sucessfully"]);
             }
@@ -59,11 +59,11 @@ class CartController extends Controller
     }
     public function updatecart(Request $request)
     {
-        $prod_id = $request->input('prod_id');
-        $prod_qty = $request->input('prod_qty');
+        $prod_id = $request['prod_id'];
+        $prod_qty = $request['prod_qty'];
         if (Auth::check()) {
-            if (Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists()) {
-                $cart = Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->first();
+            if (Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->exists()) {
+                $cart = Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->first();
                 $cart->quantity = $prod_qty;
                 $cart->update();
                 return response()->json(['status' => "Quantity updated"]);

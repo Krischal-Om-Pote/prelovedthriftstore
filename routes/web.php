@@ -30,7 +30,7 @@ Auth::routes();
 
 Route::post('/add-to-cart', [CartController::class, 'addProduct']);
 Route::post('delete-cart-item', [CartController::class, 'deleteproduct']);
-Route::post('update-cart', [CartController::class, 'updatecart']);
+Route::post('/update-cart', [CartController::class, 'updatecart']);
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', [CartController::class, 'viewcart'])->name('cart');
     Route::get('checkout', [CheckoutController::class, 'index']);
@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('search', [ProductController::class, 'search']);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/login', [LoginController::class, 'login']);
+// Route::post('/logout', [LoginController::class, 'logout']);
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index']);

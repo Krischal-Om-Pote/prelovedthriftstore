@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Session;
 
 class LoginController extends Controller
 {
@@ -62,6 +63,11 @@ class LoginController extends Controller
         } else {
             return redirect()->back()->with('error', 'Your provided information wrong!');
         }
+    }
+    public function logout(Request $request)
+    {
+        // Session::flush();
+        return redirect('/');
     }
     /**
      * Create a new controller instance.

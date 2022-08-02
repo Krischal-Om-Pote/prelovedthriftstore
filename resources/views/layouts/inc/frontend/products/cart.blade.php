@@ -10,11 +10,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width , initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>PreLoved</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- <link rel="stylesheet" href="{{ asset('assets/js/bootstrap.bundle.mins') }}"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
@@ -174,21 +176,23 @@
                 @php $total=0; @endphp
                 @foreach($cartitems as $item)
                 <div class="row product_data">
-                    <div class="col-md-2 my-auto">
+                    <div class="col-md-2 ">
                         <img src="{{asset('uploads/product/'.$item->image)}}" alt="Image here" width="80px" height="80px">
                     </div>
-                    <div class="col-md-5 my-auto">
+                    <div class="col-3">
                         <label>{{$item->products->name}}</label>
                     </div>
-                    <div class="col-2 my-auto">
+                    <div class="col-1">
+
                         <label>Rs {{$item->price}}</label>
                     </div>
-                    <div class="col-md-3 my-auto">
+                    <div class="col-3 ">
                         <input type="hidden" class="prod_id" value="{{$item->product_id}}">
                         @if($item->quantity)
                         <label for="Quantity">Quantity</label>
                         <div class="input-group-text-center mb-3" style="width:130px;">
                             <button class="input-group-text changeQuantity decrement-btn">-</button>
+                            <!-- <input type="text" class="product_hidden_price" value="{{$item->price}}"> -->
                             <input type="text" name="quantity" class="form-control qty-input text-center" value="{{$item->quantity}}">
                             <button class="input-group-text changeQuantity increment-btn">+</button>
                         </div>
@@ -197,8 +201,8 @@
                         <h6>Out of Stock</h6>
                         @endif
                     </div>
-                    <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove</button>
+                    <div class="col-1">
+                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
 
@@ -211,8 +215,12 @@
             </div>
         </div>
     </div>
-    <a href="/" class="btn btn-info" type="button">
-        <i class="fa fa-search" aria-hidden="true"></i> Back to shop!</a>
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="/" class="btn btn-info" type="button">
+                <i class="fa fa-search" aria-hidden="true"></i> Back to shop!</a>
+        </div>
+    </div>
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -272,12 +280,16 @@
     $('.increment-btn').click(function(e) {
         console.log("up");
         e.preventDefault();
-        var inc_value = $(this).closest('.product_data').find('.qty-input').val();
+        var inc_value = parseInt($(this).closest('.product_data').find('.qty-input').val());
+        // var price = arseInt($(this).closest('.product_data').find('.product_hidden_price').val());
+        // var total = inc_value * price
         var value = parseInt(inc_value, 10);
-        // value = isNan(value) ? 0 : value;
+
         if (value < 10) {
             value++;
             $(this).closest('.product_data').find('.qty-input').val(value);
+
+
         }
 
 
@@ -287,6 +299,7 @@
         console.log("down");
         e.preventDefault();
         var dec_value = $(this).closest('.product_data').find('.qty-input').val();
+        var price = $(this).closest('.product_data').find('.qty-input').val();
         var value = parseInt(dec_value, 10);
         // value = isNan(value) ? 0 : value;
         if (value > 1) {
@@ -298,7 +311,7 @@
     });
     $('.delete-cart-item').click(function(e) {
         console.log("here");
-        dd("here");
+
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -308,12 +321,12 @@
         var prod_id = $(this).closest('.product_data').find('.prod_id').val();
         $.ajax({
             method: "POST",
-            url: "delete-cart-item",
+            url: "{{url('delete-cart-item')}}",
             data: {
                 'prod_id': prod_id,
             },
             sucess: function(response) {
-                window.location.reload();
+                location.reload(true);
                 swal("", response.status, "success");
             }
 
@@ -325,6 +338,7 @@
         e.preventDefault();
         var prod_id = $(this).closest('.product_data').find('.prod_id').val();
         var qty = $(this).closest('.product_data').find('.qty-input').val();
+        // console.log(qty);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -332,13 +346,14 @@
         });
         $.ajax({
             method: "POST",
-            url: "update-cart",
+            url: "{{url('update-cart')}}",
             data: {
                 'prod_id': prod_id,
                 'prod_qty': qty,
             },
             sucess: function(response) {
-                alert(response);
+                // console.log(response);
+                location.reload(true);
                 // window.location.reload();
                 // swal("", response.status, "success");
             }

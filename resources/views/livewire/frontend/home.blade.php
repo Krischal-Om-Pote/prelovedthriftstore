@@ -45,6 +45,10 @@
                             <li><a href="{{ url('/login') }}">LOGIN</a></li>
                             <li><a href="{{ url('/register') }}">REGISTER</a></li>
                             @endguest
+                            <!-- <li><a href="{{route('logout')}}">{{ __('Logout') }}</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form> -->
 
                         </ul>
 
