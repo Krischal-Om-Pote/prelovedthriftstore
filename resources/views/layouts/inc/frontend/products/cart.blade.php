@@ -326,13 +326,21 @@
                 'prod_id': prod_id,
             },
             sucess: function(response) {
-                location.reload(true);
-                swal("", response.status, "success");
+                // location.reload(true);
+                // $(document).ajaxSuccess(function() {
+                //     window.location.reload();
+                // });
+                // history.go(0)
+                // window.location.href = 'http://127.0.0.1:8000/cart/';
+                swal("Delete Successful", response.status, "success");
             }
 
 
         });
 
+    });
+    $(document).ajaxStop(function() {
+        window.location.reload();
     });
     $('.changeQuantity').click(function(e) {
         e.preventDefault();
